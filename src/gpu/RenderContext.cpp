@@ -428,7 +428,7 @@ std::unique_ptr<FragmentProcessor> RenderContext::getClipMask(const Path& clip,
                                                               const Rect& deviceBounds,
                                                               const Matrix& viewMatrix,
                                                               Rect* scissorRect) {
-  if (!clip.isEmpty() && clip.contains(deviceBounds)) {
+  if (clip.isEmpty() || clip.contains(deviceBounds)) {
     return nullptr;
   }
   auto [rect, useScissor] = getClipRect(clip);

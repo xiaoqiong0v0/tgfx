@@ -35,10 +35,7 @@ std::shared_ptr<Picture> RecordingContext::finishRecordingAsPicture() {
 }
 
 void RecordingContext::clear(const Color& color) {
-  for (const auto& record : records) {
-    delete record;
-  }
-  records.resize(0);
+  clearRecords();
   records.push_back(new DrawClear(color));
 }
 
@@ -99,5 +96,12 @@ void RecordingContext::drawPicture(std::shared_ptr<Picture> picture, const MCSta
   } else {
     DrawContext::drawPicture(std::move(picture), state);
   }
+}
+
+void RecordingContext::clearRecords() {
+  for (const auto& record : records) {
+    delete record;
+  }
+  records.resize(0);
 }
 }  // namespace tgfx

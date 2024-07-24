@@ -47,6 +47,8 @@ class RecordingContext : public DrawContext {
 
   void drawPicture(std::shared_ptr<Picture> picture, const MCState& state) override;
 
+  void clearRecords();
+
  private:
   std::vector<Record*> records = {};
 };

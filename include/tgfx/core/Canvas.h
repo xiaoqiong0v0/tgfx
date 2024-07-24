@@ -41,11 +41,11 @@ class MCState;
  * transformed geometry is clipped by the intersection of all the clip values in the stack.
  */
 class Canvas {
- public:
+public:
   /**
    * Returns the associated Surface if the Canvas is backed by one, otherwise returns nullptr.
    */
-  Surface* getSurface() const;
+  Surface *getSurface() const;
 
   /**
    * Saves matrix and clip. Calling restore() discards changes to them, restoring them to their state
@@ -118,19 +118,19 @@ class Canvas {
    * effect of transforming the drawn geometry by matrix, before transforming the result with the
    * existing Matrix.
    */
-  void concat(const Matrix& matrix);
+  void concat(const Matrix &matrix);
 
   /**
    * Returns the current total matrix.
    */
-  const Matrix& getMatrix() const;
+  const Matrix &getMatrix() const;
 
   /**
    * Replaces transformation with specified matrix. Unlike concat(), any prior matrix state is
    * overwritten.
    * @param matrix  matrix to copy, replacing existing Matrix
    */
-  void setMatrix(const Matrix& matrix);
+  void setMatrix(const Matrix &matrix);
 
   /**
    * Sets Matrix to the identity matrix. Any prior matrix state is overwritten.
@@ -140,66 +140,66 @@ class Canvas {
   /**
    * Returns the current total clip Path.
    */
-  const Path& getTotalClip() const;
+  const Path &getTotalClip() const;
 
   /**
    * Replaces clip with the intersection of clip and rect. The resulting clip is aliased; pixels are
    * fully contained by the clip. The rect is transformed by the current Matrix before it is
    * combined with clip.
    */
-  void clipRect(const Rect& rect);
+  void clipRect(const Rect &rect);
 
   /**
    * Replaces clip with the intersection of clip and path. The path is transformed by Matrix before
    * it is combined with clip.
    */
-  void clipPath(const Path& path);
+  void clipPath(const Path &path);
 
   /**
    * Fills the entire clip region to a transparent color using BlendMode::Src. This has the effect
    * of replacing all pixels within the clip region with a transparent color.
    */
-  void clear(const Color& color = Color::Transparent());
+  void clear(const Color &color = Color::Transparent());
 
   /**
    * Fills a specified rectangle with a given color using the current clip and BlendMode::Src. This
    * has the effect of replacing all pixels within the rectangle with the specified color.
    */
-  void clearRect(const Rect& rect, const Color& color = Color::Transparent());
+  void clearRect(const Rect &rect, const Color &color = Color::Transparent());
 
   /**
    * Draws a line from (x0, y0) to (x1, y1) using the current clip, matrix, and specified paint.
    * The Paint::style is ignored, as if set to PaintStyle::Stroke.
    */
-  void drawLine(float x0, float y0, float x1, float y1, const Paint& paint);
+  void drawLine(float x0, float y0, float x1, float y1, const Paint &paint);
 
   /**
    * Draws a line from p0 to p1 using the current clip, matrix, and specified paint. The
    * Paint::style is ignored, as if it were set to PaintStyle::Stroke.
    */
-  void drawLine(const Point& p0, const Point& p1, const Paint& paint) {
+  void drawLine(const Point &p0, const Point &p1, const Paint &paint) {
     drawLine(p0.x, p0.y, p1.x, p1.y, paint);
   }
 
   /**
    * Draws a rectangle using the current clip, matrix, and specified paint.
    */
-  void drawRect(const Rect& rect, const Paint& paint);
+  void drawRect(const Rect &rect, const Paint &paint);
 
   /**
    * Draws an oval using the current clip, matrix, and specified paint.
    */
-  void drawOval(const Rect& oval, const Paint& paint);
+  void drawOval(const Rect &oval, const Paint &paint);
 
   /**
    * Draws a circle using the current clip, matrix, and specified paint.
    */
-  void drawCircle(float centerX, float centerY, float radius, const Paint& paint);
+  void drawCircle(float centerX, float centerY, float radius, const Paint &paint);
 
   /**
    * Draws a circle using the current clip, matrix, and specified paint.
    */
-  void drawCircle(const Point& center, float radius, const Paint& paint) {
+  void drawCircle(const Point &center, float radius, const Paint &paint) {
     drawCircle(center.x, center.y, radius, paint);
   }
 
@@ -210,18 +210,18 @@ class Canvas {
    * @param radiusY axis length on y-axis of the rounded corners.
    * @param paint stroke, blend, color, and so on, used to draw.
    */
-  void drawRoundRect(const Rect& rect, float radiusX, float radiusY, const Paint& paint);
+  void drawRoundRect(const Rect &rect, float radiusX, float radiusY, const Paint &paint);
 
   /**
    * Draws a RRect using the current clip, matrix, and specified paint. The rrect may represent a
    * rectangle, circle, oval, rounded rectangle.
    */
-  void drawRRect(const RRect& rRect, const Paint& paint);
+  void drawRRect(const RRect &rRect, const Paint &paint);
 
   /**
    * Draws a path using the current clip, matrix, and specified paint.
    */
-  void drawPath(const Path& path, const Paint& paint);
+  void drawPath(const Path &path, const Paint &paint);
 
   /**
    * Draws an image, with its top-left corner at (left, top), using current clip, matrix and
@@ -229,7 +229,7 @@ class Canvas {
    * MipmapMode::Linear as the sampling options. Otherwise, it uses FilterMode::Linear and
    * MipmapMode::None as the sampling options.
    */
-  void drawImage(std::shared_ptr<Image> image, float left, float top, const Paint* paint = nullptr);
+  void drawImage(std::shared_ptr<Image> image, float left, float top, const Paint *paint = nullptr);
 
   /**
    * Draws an Image, with its top-left corner at (0, 0), using current clip and matrix premultiplied
@@ -237,7 +237,7 @@ class Canvas {
    * MipmapMode::Linear as the sampling options. Otherwise, it uses FilterMode::Linear and
    * MipmapMode::None as the sampling options.
    */
-  void drawImage(std::shared_ptr<Image> image, const Matrix& matrix, const Paint* paint = nullptr);
+  void drawImage(std::shared_ptr<Image> image, const Matrix &matrix, const Paint *paint = nullptr);
 
   /**
    * Draws an image, with its top-left corner at (0, 0), using current clip, matrix and optional
@@ -245,14 +245,14 @@ class Canvas {
    * sampling options. Otherwise, it uses FilterMode::Linear and MipmapMode::None as the sampling
    * options.
    */
-  void drawImage(std::shared_ptr<Image> image, const Paint* paint = nullptr);
+  void drawImage(std::shared_ptr<Image> image, const Paint *paint = nullptr);
 
   /**
    * Draws an image, with its top-left corner at (0, 0), using current clip, matrix, sampling
    * options and optional paint.
    */
-  void drawImage(std::shared_ptr<Image> image, const SamplingOptions& sampling,
-                 const Paint* paint = nullptr);
+  void drawImage(std::shared_ptr<Image> image, const SamplingOptions &sampling,
+                 const Paint *paint = nullptr);
 
   /**
    * Draws text, with origin at (x, y), using clip, matrix, font, and paint. The text must be in
@@ -260,8 +260,8 @@ class Canvas {
    * font. It does not perform typeface fallback for characters not found in the Typeface. Glyphs
    * are positioned based on their default advances.
    */
-  void drawSimpleText(const std::string& text, float x, float y, const Font& font,
-                      const Paint& paint);
+  void drawSimpleText(const std::string &text, float x, float y, const Font &font,
+                      const Paint &paint);
 
   /**
     * Draws an array of glyphs from glyphIDs at positions using clip, matrix, font, and paint.
@@ -272,7 +272,7 @@ class Canvas {
     * @param paint blend, color, and so on, used to draw.
     */
   void drawGlyphs(const GlyphID glyphs[], const Point positions[], size_t glyphCount,
-                  const Font& font, const Paint& paint);
+                  const Font &font, const Paint &paint);
 
   /**
    * Draws a Picture using the current clip and matrix. Clip and matrix are unchanged by picture
@@ -289,7 +289,7 @@ class Canvas {
    * @param matrix Matrix to rotate, scale, translate, and so on; may be nullptr.
    * @param paint Paint to apply transparency, filtering, and so on; may be nullptr.
    */
-  void drawPicture(std::shared_ptr<Picture> picture, const Matrix* matrix, const Paint* paint);
+  void drawPicture(std::shared_ptr<Picture> picture, const Matrix *matrix, const Paint *paint);
 
   /**
    * Draws a set of sprites from the atlas using the current clip, matrix, and specified paint.
@@ -302,25 +302,31 @@ class Canvas {
    * @param paint blend, alpha, and so on, used to draw.
    */
   void drawAtlas(std::shared_ptr<Image> atlas, const Matrix matrix[], const Rect tex[],
-                 const Color colors[], size_t count, const SamplingOptions& sampling = {},
-                 const Paint* paint = nullptr);
+                 const Color colors[], size_t count, const SamplingOptions &sampling = {},
+                 const Paint *paint = nullptr);
 
- private:
-  DrawContext* drawContext = nullptr;
+private:
+  DrawContext *drawContext = nullptr;
   std::unique_ptr<MCState> mcState;
-  std::stack<std::unique_ptr<MCState>> mcStack;
+  std::stack<std::unique_ptr<MCState> > mcStack;
+  Path initClip;
 
-  explicit Canvas(DrawContext* drawContext);
-  Canvas(DrawContext* drawContext, const Path& initClip);
-  bool drawSimplePath(const Path& path, const FillStyle& style);
-  void drawImage(std::shared_ptr<Image> image, const SamplingOptions& sampling, const Paint* paint,
-                 const Matrix* extraMatrix);
-  void drawLayer(std::shared_ptr<Picture> picture, const MCState& state, const FillStyle& style,
+  explicit Canvas(DrawContext *drawContext);
+
+  Canvas(DrawContext *drawContext, const Path &initClip);
+
+  bool drawSimplePath(const Path &path, const FillStyle &style);
+
+  void drawImage(std::shared_ptr<Image> image, const SamplingOptions &sampling, const Paint *paint,
+                 const Matrix *extraMatrix);
+
+  void drawLayer(std::shared_ptr<Picture> picture, const MCState &state, const FillStyle &style,
                  std::shared_ptr<ImageFilter> filter = nullptr);
+
   void resetMCState();
 
   friend class Surface;
   friend class Picture;
   friend class Recorder;
 };
-}  // namespace tgfx
+} // namespace tgfx

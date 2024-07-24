@@ -32,7 +32,7 @@ Canvas* Recorder::beginRecording() {
   }
   if (activelyRecording) {
     canvas->resetMCState();
-    recordingContext->clear();
+    recordingContext->clear(Color::Transparent());
   } else {
     activelyRecording = true;
   }

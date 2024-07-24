@@ -19,7 +19,7 @@
 #include "MeasureContext.h"
 
 namespace tgfx {
-void MeasureContext::clear() {
+void MeasureContext::clear(const Color& color) {
   bounds.setEmpty();
 }
 

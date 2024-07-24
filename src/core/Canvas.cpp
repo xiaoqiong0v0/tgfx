@@ -120,17 +120,17 @@ void Canvas::resetMCState() {
   std::stack<std::unique_ptr<MCState>>().swap(mcStack);
 }
 
-void Canvas::clear() {
-  auto& clip = mcState->clip;
+void Canvas::clear(const Color& color) {
+  const auto& clip = mcState->clip;
   if (clip.isEmpty()) {
     if (clip.isInverseFillType()) {
-      drawContext->clear();
+      drawContext->clear(color);
     }
     return;
   }
   auto rect = clip.getBounds();
   FillStyle style = {};
-  style.color = Color::Transparent();
+  style.color = color;
   style.blendMode = BlendMode::Src;
   MCState state = {Matrix::I(), clip};
   drawContext->drawRect(rect, state, style);

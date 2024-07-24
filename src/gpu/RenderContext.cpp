@@ -83,9 +83,9 @@ Rect RenderContext::clipLocalBounds(const Rect& localBounds, const MCState& stat
   return drawRect;
 }
 
-void RenderContext::clear() {
+void RenderContext::clear(const Color& color) {
   FillStyle style = {};
-  style.color = Color::Transparent();
+  style.color = color;
   style.blendMode = BlendMode::Src;
   auto renderTarget = opContext->renderTarget();
   auto rect = Rect::MakeWH(renderTarget->width(), renderTarget->height());

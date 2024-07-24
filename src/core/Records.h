@@ -22,6 +22,7 @@
 
 namespace tgfx {
 enum class RecordType {
+  DrawClear,
   DrawRect,
   DrawRRect,
   DrawPath,
@@ -41,6 +42,22 @@ class Record {
   virtual RecordType type() const = 0;
 
   virtual void playback(DrawContext* context) const = 0;
+};
+
+class DrawClear : public Record {
+public:
+  DrawClear(const Color& color): color(color) {
+  }
+
+  RecordType type() const override {
+    return RecordType::DrawClear;
+  }
+
+  void playback(DrawContext* context) const override {
+    context->clear(color);
+  }
+
+  Color color;
 };
 
 class DrawRect : public Record {

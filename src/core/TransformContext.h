@@ -43,8 +43,8 @@ class TransformContext : public DrawContext {
   explicit TransformContext(DrawContext* drawContext) : drawContext(drawContext) {
   }
 
-  void clear() override {
-    drawContext->clear();
+  void clear(const Color& color) override {
+    drawContext->clear(color);
   }
 
   void drawRect(const Rect& rect, const MCState& state, const FillStyle& style) override {

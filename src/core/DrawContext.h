@@ -47,7 +47,7 @@ class DrawContext {
    * Fills the entire clip region to a transparent color using BlendMode::Src. This has the effect
    * of replacing all pixels within the clip region with a transparent color.
    */
-  virtual void clear() = 0;
+  virtual void clear(const Color& color) = 0;
 
   /**
    * Draws a rectangle with the specified FillStyle.

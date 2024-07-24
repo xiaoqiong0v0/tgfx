@@ -34,11 +34,12 @@ std::shared_ptr<Picture> RecordingContext::finishRecordingAsPicture() {
   return std::shared_ptr<Picture>(new Picture(std::move(records)));
 }
 
-void RecordingContext::clear() {
-  for (auto& record : records) {
+void RecordingContext::clear(const Color& color) {
+  for (const auto& record : records) {
     delete record;
   }
   records.resize(0);
+  records.push_back(new DrawClear(color));
 }
 
 void RecordingContext::drawRect(const Rect& rect, const MCState& state, const FillStyle& style) {

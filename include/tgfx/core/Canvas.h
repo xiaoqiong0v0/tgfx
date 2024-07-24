@@ -159,7 +159,7 @@ class Canvas {
    * Fills the entire clip region to a transparent color using BlendMode::Src. This has the effect
    * of replacing all pixels within the clip region with a transparent color.
    */
-  void clear();
+  void clear(const Color& color = Color::Transparent());
 
   /**
    * Fills a specified rectangle with a given color using the current clip and BlendMode::Src. This

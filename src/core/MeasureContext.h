@@ -27,7 +27,7 @@ class MeasureContext : public DrawContext {
     return bounds;
   }
 
-  void clear() override;
+  void clear(const Color& color) override;
 
   void drawRect(const Rect& rect, const MCState& state, const FillStyle& style) override;
 

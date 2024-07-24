@@ -28,7 +28,11 @@ LayerUnrollContext::LayerUnrollContext(DrawContext* drawContext, FillStyle fillS
     : drawContext(drawContext), fillStyle(std::move(fillStyle)), imageFilter(std::move(filter)) {
 }
 
-void LayerUnrollContext::clear() {
+void LayerUnrollContext::clear(const Color& color) {
+  if (!imageFilter) {
+    drawContext->clear(color);
+    unrolled = true;
+  }
 }
 
 void LayerUnrollContext::drawRect(const Rect& rect, const MCState& state, const FillStyle& style) {
